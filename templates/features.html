@@ -1,0 +1,40 @@
+<html>
+    <head><title>Vulkan features GPU Database</title>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+    }
+    th {
+      text-align: left;
+    }
+    </style>
+    </head>
+    <body>
+    <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
+    <table style="width:100%" >
+      <tr>
+        <th> GPU Name </th>
+        <th> geometryShader </th>
+        <th> tesselationShader </th>
+        <th> shaderInt16 </th>
+        <th> sparseBinding </th>
+        <th> textureCompressionETC2 </th>
+        <th> vertexPipelineStoresAndAtomics </th>
+      </tr>
+      <h2> List of GPU Features </h2>
+          <tr>
+            <h3><td> {{ gpu.gpuName }} </td><h3>
+            <td> {{ gpu.geometryShader }}</td>
+            <td> {{ gpu.tesselationShader }} </td>
+            <td> {{ gpu.shaderInt16 }} </td>
+            <td> {{ gpu.sparseBinding }} </td>
+            <td> {{ gpu.textureCompressionETC2 }} </td>
+            <td> {{ gpu.vertexPipelineStoresAndAtomics }} </td>
+          </tr>
+    </table>
+  </body>
+</html>

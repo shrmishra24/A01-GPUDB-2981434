@@ -1,0 +1,66 @@
+<html>
+    <head><title>Vulkan features GPU Database</title>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+    }
+    th {
+      text-align: left;
+    }
+    </style>
+    </head>
+    <body>
+      <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
+      <h3>Update your GPU details here</h3>
+      <form action = "/edit" method ="post">
+            <p><h4>GPU Name                                  :<input type = "text" name = "gpuName" value = "{{ gpu.gpuName }}" disabled/></h4></p>
+            <p>  Manufacturer                                : <input type = "text" name = "manufacturer" value = "{{ gpu.manufacturer }}"/></p>
+            <p>  Date Issued                                 : <input type = "date" name = "dateIssued" value = "{{ gpu.dateIssued }}"/></p>
+          <p>GPU Features</p>
+          {% if gpu.geometryShader %}
+            <p>  geometryShader                              : <input type = "checkbox" name="geometryShader"  checked/></p>
+          {% else %}
+          <p>  geometryShader                              : <input type = "checkbox" name="geometryShader"  /></p>
+          {% endif %}
+
+          {% if gpu.tesselationShader %}
+            <p>  tesselationShader                           : <input type = "checkbox" name="tesselationShader"  checked/></p>
+          {% else %}
+            <p>  tesselationShader                           : <input type = "checkbox" name="tesselationShader" /></p>
+          {% endif %}
+
+          {% if gpu.shaderInt16 %}
+            <p>  shaderInt16                                 : <input type = "checkbox" name="shaderInt16"  checked/></p>
+          {% else %}
+            <p>  shaderInt16                                 : <input type = "checkbox" name="shaderInt16" /></p>
+          {% endif %}
+
+          {% if gpu.sparseBinding %}
+            <p>  sparseBinding                               : <input type = "checkbox" name="sparseBinding" checked/></p>
+          {% else %}
+            <p>  sparseBinding                               : <input type = "checkbox" name="sparseBinding" /></p>
+          {% endif %}
+
+          {% if gpu.textureCompressionETC2 %}
+            <p>  textureCompressionETC2                      : <input type = "checkbox" name="textureCompressionETC2"  checked/></p>
+          {% else %}
+            <p>  textureCompressionETC2                      : <input type = "checkbox" name="textureCompressionETC2" /></p>
+          {% endif %}
+
+          {% if gpu.vertexPipelineStoresAndAtomics %}
+            <p>  vertexPipelineStoresAndAtomics              : <input type = "checkbox" name="vertexPipelineStoresAndAtomics"  checked/></p>
+          {% else %}
+            <p>  vertexPipelineStoresAndAtomics              : <input type = "checkbox" name="vertexPipelineStoresAndAtomics" /></p>
+          {% endif %}
+
+            <p>  <input type = "submit" value = "Update" name="button"><br>
+      </form>
+      <form method="post" action="/edit">
+          <input type="submit" value="Cancel" name="button"/>
+      </form>
+  </body>
+</html>

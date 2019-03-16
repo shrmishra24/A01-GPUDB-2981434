@@ -1,0 +1,46 @@
+<html>
+    <head><title>Vulkan features GPU Database</title>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+    }
+    th {
+      text-align: left;
+    }
+    </style>
+    </head>
+    <body>
+    <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
+    <center>
+      <form action = "/compare" method="get">
+        <table style="width:50%" >
+      <tr>
+        <th> Select GPU Name 1</th>
+        <th> Select GPU Name 2 </th>
+      </tr>
+      <h2> Select GPU's to Compare </h2>
+          <tr>
+            <td>
+              <select name = "gpuName">
+                {% for gpu in gpuList %}
+                <option value="{{ gpu.gpuName }}">{{ gpu.gpuName }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name = "gpuName1">
+              {% for gpu in gpuList %}
+                <option value="{{ gpu.gpuName }}">{{ gpu.gpuName }}</option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+    </table>
+      <input type="submit" name ="button" value="Compare"/>
+    </form></center>
+  </body>
+</html>

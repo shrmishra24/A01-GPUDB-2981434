@@ -1,0 +1,55 @@
+<html>
+    <head><title>Vulkan features GPU Database</title>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+    }
+    th {
+      text-align: left;
+    }
+    </style>
+    </head>
+    <body>
+    <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
+    <table style="width:100%" >
+      <tr>
+        <th> GPU Name </th>
+        <th> Manufacturer </th>
+        <th> Date Issued </th>
+        <!-- <th> <form action="/view" method="post"><input type="submit" value="Compare" name="button"/></form> </th> -->
+      <th> Update </th>
+        <th>Delete</th>
+      </tr>
+      <h2> List of GPU's </h2>
+      {% if gpuList %}
+          {% for gpu in gpuList %}
+          <tr>
+            <td><a href="/features?gpuName={{ gpu.gpuName }}"> {{ gpu.gpuName }}</a> </td>
+            <td> {{ gpu.manufacturer }} </td>
+            <td> {{ gpu.dateIssued }} </td>
+             <!-- <td>
+              <form action="/compare" method="post">
+                  <input type = "checkbox" name ="gpuName1" value="{{ gpu.gpuName }}"/>
+              </form>
+            </td> -->
+            <td>
+              <form action="/edit" method="get|post">
+                <a href="/edit?gpuName={{ gpu.gpuName }}">Update</a>
+              </form>
+            </td>
+            <td>
+              <form action="/view" method="post">
+                <input type="hidden" name="gpuName" value="{{ gpu.gpuName }}"/>
+                <input type="submit" value="Delete" name="button"/>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+      {% endif %}
+    </table>
+  </body>
+</html>

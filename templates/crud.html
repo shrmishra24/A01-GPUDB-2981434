@@ -1,0 +1,41 @@
+{% extends "templates/main.html" %}
+
+{% block title %} Log into your account {% endblock %}
+
+{% block content %}
+    <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
+    <h3>Add GPU Details to Save</h3>
+    <form action = "/gpu" method ="post">
+      <table>
+        <tr>
+          <td> Device :</td><td> <input type = "text" name = "gpuName"/></td></tr>
+          <tr>
+          <td>  Manufacturer :</td><td>  <input type = "text" name = "manufacturer"/></td></tr>
+          <tr>
+          <td> Issued Date :</td><td>  <input type = "date" name = "dateIssued"/></td></tr>
+          <tr>
+          <th><center>GPU Features</center></th></tr>
+          <tr>
+          <td> geometryShader :</td><td>  <input type = "checkbox" name="geometryShader"/></td></tr>
+          <tr>
+          <td> tesselationShader :</td><td>  <input type = "checkbox" name="tesselationShader"/></td></tr>
+          <tr>
+          <td>shaderInt16:</td><td>  <input type = "checkbox" name="shaderInt16"/></td></tr>
+          <tr>
+          <td> sparseBinding:</td><td> <input type = "checkbox" name="sparseBinding"/></td></tr>
+          <tr>
+          <td>  textureCompressionETC2 :</td><td>  <input type = "checkbox" name="textureCompressionETC2"/></td></tr>
+          <tr>
+          <td>  vertexPipelineStoresAndAtomics:</td><td>  <input type = "checkbox" name="vertexPipelineStoresAndAtomics"/></td></tr>
+          <tr></tr>
+          <tr>
+              <td>
+                <input type = "submit" value = "Save" name="button">&nbsp;&nbsp;&nbsp;
+                <input type = "submit" value = "View" name="button">&nbsp;&nbsp;&nbsp;
+                <input type = "submit" value = "Compare" name="button">&nbsp;&nbsp;&nbsp;
+                <input type = "submit" value = "Feature Search" name="button">&nbsp;&nbsp;&nbsp;
+              </td>
+            </tr>
+          </table>
+    </form>
+  {% endblock %}
