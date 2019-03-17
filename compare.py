@@ -24,6 +24,21 @@ class Compare(webapp2.RequestHandler):
         global gpuName
         global gpuName1
         action = self.request.get('button')
+        user = users.get_current_user()
+        if user == None:
+            rendered_template = {
+            'login_url' : users.create_login_url(self.request.uri)
+            }
+            template = JINJA_ENVIRONMENT.get_template('templates/mainpage_guest.html')
+            self.response.write(template.render(rendered_template))
+            return
+
+        myuser_key = ndb.Key('MyUser', user.user_id())
+        myuser = myuser_key.get()
+        if myuser == None:
+            myuser = MyUser(id=user.user_id())
+            myuser.put()
+
         if action=='Compare':
             gpuName = self.request.get('gpuName')
             gpu_key = ndb.Key('gpuList', gpuName)
@@ -34,6 +49,7 @@ class Compare(webapp2.RequestHandler):
             gpu1 = gpu_key1.get()
 
             template_values = {
+            'logout_url' : users.create_logout_url(self.request.uri),
             'gpu' : gpu,
             'gpu1' : gpu1
             }

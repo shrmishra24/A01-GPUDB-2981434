@@ -20,6 +20,21 @@ class Search(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         action = self.request.get('button')
+        user = users.get_current_user()
+        if user == None:
+            rendered_template = {
+            'login_url' : users.create_login_url(self.request.uri)
+            }
+            template = JINJA_ENVIRONMENT.get_template('templates/mainpage_guest.html')
+            self.response.write(template.render(rendered_template))
+            return
+
+        myuser_key = ndb.Key('MyUser', user.user_id())
+        myuser = myuser_key.get()
+        if myuser == None:
+            myuser = MyUser(id=user.user_id())
+            myuser.put()
+
         if action == 'Search':
             geometryShader = "False"
             tesselationShader = "False"
@@ -49,7 +64,7 @@ class Search(webapp2.RequestHandler):
                 gpu_fetched = gpu_fetched.filter(gpuList.textureCompressionETC2 == True)
             if vertexPipelineStoresAndAtomics:
                 gpu_fetched = gpu_fetched.filter(gpuList.vertexPipelineStoresAndAtomics == True)
-            gpu_fetched = gpu_fetched.filter()      
+            gpu_fetched = gpu_fetched.filter()
 
             results_dict = {'logout_url' : users.create_logout_url(self.request.uri),
                             'gpuList':gpu_fetched

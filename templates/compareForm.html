@@ -1,31 +1,107 @@
 <html>
     <head><title>Vulkan features GPU Database</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 5px;
-    }
-    th {
-      text-align: left;
-    }
+    body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+          }
+          .header h2{
+                margin : 10px;
+                text-align: left;
+                text-transform: uppercase;
+                color: #213345;
+          }
+      .navbar {
+      width: 100%;
+      background-color: #2b333b;
+      overflow: auto;
+      }
+
+      .navbar a {
+      float: left;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+      }
+
+      .navbar a:hover {
+      background-color: #ff3333;
+      }
+
+      .active {
+      background-color: #ff3333;
+      }
+
+      @media screen and (max-width: 1000px) {
+      .navbar a {
+        float: none;
+        display: block;
+      }
+      }
+      #tableCSS {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        margin : 10px;
+      }
+
+      #tableCSS td, #tableCSS th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #tableCSS tr:nth-child(even){background-color: #f2f2f2;}
+
+      #tableCSS tr:hover {background-color: #ddd;}
+
+      #tableCSS th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #555555;
+        color: white;
+      }
+      input[type=submit] {
+        width: 10%;
+        background-color: #00334d;
+        color: white;
+        padding: 14px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin : 10px;
+      }
+      input[type=submit]:hover {
+        background-color: #00334d;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      }
     </style>
     </head>
     <body>
-    <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
-    <center>
+      <div class="navbar">
+          <a  href="/"><i class="fa fa-save"></i>Add GPU</a>
+          <a href="/searchFeatures"><i class="fa fa-fw fa-search"></i>Feature Search</a>
+          <a href="/view"><i class="fa fa-eye"></i>View Report</a>
+          <a href="/compareForm"><i class='far fa-clone'></i>Compare GPU's</a>
+          <a style="float:right"  href="{{ logout_url }}"><i class="fa fa-sign-out"></i>Logout</a>
+      </div>
+  <div class="header"><h2> Select GPU's to Compare </h2> </div>
       <form action = "/compare" method="get">
-        <table style="width:50%" >
+        <table id = "tableCSS" >
       <tr>
         <th> Select GPU Name 1</th>
         <th> Select GPU Name 2 </th>
       </tr>
-      <h2> Select GPU's to Compare </h2>
+
           <tr>
             <td>
-              <select name = "gpuName">
+              <select name = "gpuName" >
                 {% for gpu in gpuList %}
                 <option value="{{ gpu.gpuName }}">{{ gpu.gpuName }}</option>
                 {% endfor %}
@@ -39,8 +115,8 @@
               </select>
             </td>
           </tr>
-    </table>
-      <input type="submit" name ="button" value="Compare"/>
-    </form></center>
+    </table> 
+        <input type="submit" name ="button" value="Compare"/>
+    </form>
   </body>
 </html>

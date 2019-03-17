@@ -20,6 +20,21 @@ class Edit(webapp2.RequestHandler):
     gpuName = ""
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        if user == None:
+            rendered_template = {
+            'login_url' : users.create_login_url(self.request.uri)
+            }
+            template = JINJA_ENVIRONMENT.get_template('templates/mainpage_guest.html')
+            self.response.write(template.render(rendered_template))
+            return
+
+        myuser_key = ndb.Key('MyUser', user.user_id())
+        myuser = myuser_key.get()
+        if myuser == None:
+            myuser = MyUser(id=user.user_id())
+            myuser.put()
+
         global gpuName
         gpuName = self.request.get('gpuName')
         print("the gpu name is " +gpuName)
@@ -27,6 +42,7 @@ class Edit(webapp2.RequestHandler):
         gpu = gpu_key.get()
 
         template_values = {
+        'logout_url' : users.create_logout_url(self.request.uri),
         'gpu' : gpu
         }
 

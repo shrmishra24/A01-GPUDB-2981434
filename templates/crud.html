@@ -1,41 +1,123 @@
-{% extends "templates/main.html" %}
+<html><head><title>Vulkan features GPU Database</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .header h3{
+              margin : 10px;
+              text-align: left;
+              text-transform: uppercase;
+              color: #213345;
+        }
+        input[type=text], select {
+            width: 70%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+          input[type=date], select {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
 
-{% block title %} Log into your account {% endblock %}
+      input[type=submit] {
+        width: 20%;
+        background-color: #00334d;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-{% block content %}
-    <h2><center>Welcome to the application you can logout <a href="{{ logout_url }}">here</a></center><h2>
-    <h3>Add GPU Details to Save</h3>
+      input[type=submit]:hover {
+        background-color: #004080;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+
+    .form{
+      width: 75%;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    .navbar {
+    width: 100%;
+    background-color: #2b333b;
+    overflow: auto;
+    }
+
+    .navbar a {
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    .navbar a:hover {
+    background-color: #ff3333;
+    }
+
+    .active {
+    background-color: #ff3333;
+    }
+
+    @media screen and (max-width: 1000px) {
+    .navbar a {
+      float: none;
+      display: block;
+    }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+      <a  href="/"><i class="fa fa-fw fa-home"></i>Home</a>
+      <a href="/searchFeatures"><i class="fa fa-fw fa-search"></i>Feature Search</a>
+      <a href="/view"><i class="fa fa-eye"></i>View Report</a>
+      <a href="/compareForm"><i class='far fa-clone'></i>Compare GPU's</a>
+      <a style="float:right"  href="{{ logout_url }}"><i class="fa fa-sign-out"></i>Logout</a>
+  </div>
+    <div class ="header">
+    <h3>&nbsp;&nbsp;Add GPU Details to Save</h3>
+    </div>
+    <div class ="form">
     <form action = "/gpu" method ="post">
-      <table>
-        <tr>
-          <td> Device :</td><td> <input type = "text" name = "gpuName"/></td></tr>
-          <tr>
-          <td>  Manufacturer :</td><td>  <input type = "text" name = "manufacturer"/></td></tr>
-          <tr>
-          <td> Issued Date :</td><td>  <input type = "date" name = "dateIssued"/></td></tr>
-          <tr>
-          <th><center>GPU Features</center></th></tr>
-          <tr>
-          <td> geometryShader :</td><td>  <input type = "checkbox" name="geometryShader"/></td></tr>
-          <tr>
-          <td> tesselationShader :</td><td>  <input type = "checkbox" name="tesselationShader"/></td></tr>
-          <tr>
-          <td>shaderInt16:</td><td>  <input type = "checkbox" name="shaderInt16"/></td></tr>
-          <tr>
-          <td> sparseBinding:</td><td> <input type = "checkbox" name="sparseBinding"/></td></tr>
-          <tr>
-          <td>  textureCompressionETC2 :</td><td>  <input type = "checkbox" name="textureCompressionETC2"/></td></tr>
-          <tr>
-          <td>  vertexPipelineStoresAndAtomics:</td><td>  <input type = "checkbox" name="vertexPipelineStoresAndAtomics"/></td></tr>
-          <tr></tr>
-          <tr>
-              <td>
-                <input type = "submit" value = "Save" name="button">&nbsp;&nbsp;&nbsp;
-                <input type = "submit" value = "View" name="button">&nbsp;&nbsp;&nbsp;
-                <input type = "submit" value = "Compare" name="button">&nbsp;&nbsp;&nbsp;
-                <input type = "submit" value = "Feature Search" name="button">&nbsp;&nbsp;&nbsp;
-              </td>
-            </tr>
-          </table>
+        <label for="device">GPU Name</label><br>
+        <input type = "text" name = "gpuName"/><br>
+        <label for="manu">Manufacturer</label><br>
+        <input type = "text" name = "manufacturer"/><br>
+        <label for="dt">Issued Date </label><br>
+        <input type = "date" name = "dateIssued"/><br><br>
+        <label for="ftr"><strong>GPU Features</strong></label><br><br>
+        <label for="geo">geometryShader</label> <input type = "checkbox" name="geometryShader"/>
+        <label for="tess">tesselationShader</label> <input type = "checkbox" name="tesselationShader"/>
+        <label for="s1">shaderInt16</label><input type = "checkbox" name="shaderInt16"/>
+        <label for="s2">sparseBinding</label> <input type = "checkbox" name="sparseBinding"/>
+        <label for="tex">textureCompressionETC2</label> <input type = "checkbox" name="textureCompressionETC2"/>
+        <label for="ver">vertexPipelineStoresAndAtomics</label> <input type = "checkbox" name="vertexPipelineStoresAndAtomics"/><br>
+        <br><br>
+        <input type = "submit" value = "Save" name="button">&nbsp;&nbsp;
+        <input type = "submit" value = "View" name="button">&nbsp;&nbsp;
+        <input type = "submit" value = "Compare" name="button">&nbsp;&nbsp;
+        <input type = "submit" value = "Feature Search" name="button">
     </form>
-  {% endblock %}
+    </div>
+  </body>
+  </html>
