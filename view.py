@@ -56,4 +56,4 @@ class ViewPage(webapp2.RequestHandler):
 
             self.redirect('/view')
         elif action == 'Cancel':
-            self.redirect('/compare')   
+            self.redirect('/compare')

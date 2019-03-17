@@ -63,6 +63,22 @@
             background-color: #00334d;
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
           }
+          .button {
+            width: 10%;
+            background-color: #2b333b;
+            color: white;
+            padding: 12px 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+          }
+          .button:hover {
+            background-color: #00334d;
+            text-decoration: none;
+            }
+            .button:link{
+              text-decoration: none;
+            }
   </style>
     </head>
     <body>
@@ -82,7 +98,8 @@
         <p>  sparseBinding                               : <input type = "checkbox" name="sparseBinding" {% if sparseBinding %} checked {% endif %}/></p>
         <p>  textureCompressionETC2                      : <input type = "checkbox" name="textureCompressionETC2" {% if textureCompressionETC2 %} checked {% endif %}/></p>
         <p>  vertexPipelineStoresAndAtomics              : <input type = "checkbox" name="vertexPipelineStoresAndAtomics" {% if vertexPipelineStoresAndAtomics %} checked {% endif %}/></p>
-        <p>  <input type = "submit" value = "Search" name="button"><br>
+        <a href="javascript:history.back()" class="button">&laquo;Back</a>
+        <input type = "submit" value = "Search" name="button"><br>
       </form>
     </div>
   </body>
